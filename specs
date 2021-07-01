@@ -1,0 +1,53 @@
+Parts of SLAM:
+1. Landmark Extraction
+2. Data Association
+3. State Estimation
+4. Landmark update
+
+Particulars:
+1. ORB Feature Detector
+2. Disparity Map
+3. Tracking and Optimization
+4. Map building
+
+Six components:
+1. Initialization
+2. Feature Detection/Matching
+3. Motion Estimate
+4. Map Management
+5. Bundle Adjustment
+6. Visualization Module
+
+
+Initialization:
+    - ORB->depth information using Semi-Global Batch Matching Algorithm
+    - Obtain Disparity Map
+    - 3D reconstruction
+
+
+Feature Detection:
+    - ORB features implemented-> Feature Matching between adjacent frames
+    - Uniform distribution of features important. ANMS algorithm for that
+    - Cross checking feature mapping
+
+Motion Estimation
+    - Done by 3D-2D Perspecitve n Point Method
+    - RANSAC Outlier Rejection algorithm
+    - Minimize reprojection error by using Optimization methods
+    - Motion Estimation pipeline a state machine with 3 states. 
+
+Map Management
+    - Keyframe selection criteria
+    - Keyframe -> new feature points triangulated
+    - Reliable landmarks are added
+    - Observations and connections between landmarks
+    - Map -> Multiple keyframes -> Multiple Features. 
+    - Each feature knows the ID of its frame. 
+    - Connection between features and landmarks established
+    - Keyframes and landmarks stored in hashtable (unordered_map)
+
+Bundle Adjustment
+    - Done on active keyframes and landmarks
+    - Away from probabilistic bundling
+    - G20 framework
+    -
