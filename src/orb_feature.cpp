@@ -167,7 +167,7 @@ int main(){
         cv::Mat descriptor;
         cv::Mat descriptor2;
         // Apply ORB 
-        cv::Ptr<cv::Feature2D> orb = cv::ORB::create(15000);
+        cv::Ptr<cv::Feature2D> orb = cv::ORB::create(1000);
         orb->detectAndCompute(img, cv::Mat(), keypoints_orb, descriptor);
         orb->detectAndCompute(img, cv::Mat(), keypoints_anms2, descriptor2);
 
