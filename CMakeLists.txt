@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.13)
 project(SLAM)
 
-add_executable(ORB_Feature ${CMAKE_CURRENT_SOURCE_DIR}/src/orb_feature.cpp)
+add_executable(VF_ORB ${CMAKE_CURRENT_SOURCE_DIR}/src/video_frames.cpp)
 
 find_package(OpenCV REQUIRED)
 
@@ -14,4 +14,4 @@ include_directories(
         ${OpenCV_INCLUDE_DIRS}
 )
 
-target_link_libraries(ORB_Feature ${OpenCV_LIBS})
+target_link_libraries(VF_ORB ${OpenCV_LIBS})

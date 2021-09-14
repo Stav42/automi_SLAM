@@ -111,44 +111,44 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named ORB_Feature
+# Target rules for targets named VF_ORB
 
 # Build rule for target.
-ORB_Feature: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 ORB_Feature
-.PHONY : ORB_Feature
+VF_ORB: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 VF_ORB
+.PHONY : VF_ORB
 
 # fast build rule for target.
-ORB_Feature/fast:
-	$(MAKE) -f CMakeFiles/ORB_Feature.dir/build.make CMakeFiles/ORB_Feature.dir/build
-.PHONY : ORB_Feature/fast
+VF_ORB/fast:
+	$(MAKE) -f CMakeFiles/VF_ORB.dir/build.make CMakeFiles/VF_ORB.dir/build
+.PHONY : VF_ORB/fast
 
-src/orb_feature.o: src/orb_feature.cpp.o
+src/video_frames.o: src/video_frames.cpp.o
 
-.PHONY : src/orb_feature.o
+.PHONY : src/video_frames.o
 
 # target to build an object file
-src/orb_feature.cpp.o:
-	$(MAKE) -f CMakeFiles/ORB_Feature.dir/build.make CMakeFiles/ORB_Feature.dir/src/orb_feature.cpp.o
-.PHONY : src/orb_feature.cpp.o
+src/video_frames.cpp.o:
+	$(MAKE) -f CMakeFiles/VF_ORB.dir/build.make CMakeFiles/VF_ORB.dir/src/video_frames.cpp.o
+.PHONY : src/video_frames.cpp.o
 
-src/orb_feature.i: src/orb_feature.cpp.i
+src/video_frames.i: src/video_frames.cpp.i
 
-.PHONY : src/orb_feature.i
+.PHONY : src/video_frames.i
 
 # target to preprocess a source file
-src/orb_feature.cpp.i:
-	$(MAKE) -f CMakeFiles/ORB_Feature.dir/build.make CMakeFiles/ORB_Feature.dir/src/orb_feature.cpp.i
-.PHONY : src/orb_feature.cpp.i
+src/video_frames.cpp.i:
+	$(MAKE) -f CMakeFiles/VF_ORB.dir/build.make CMakeFiles/VF_ORB.dir/src/video_frames.cpp.i
+.PHONY : src/video_frames.cpp.i
 
-src/orb_feature.s: src/orb_feature.cpp.s
+src/video_frames.s: src/video_frames.cpp.s
 
-.PHONY : src/orb_feature.s
+.PHONY : src/video_frames.s
 
 # target to generate assembly for a file
-src/orb_feature.cpp.s:
-	$(MAKE) -f CMakeFiles/ORB_Feature.dir/build.make CMakeFiles/ORB_Feature.dir/src/orb_feature.cpp.s
-.PHONY : src/orb_feature.cpp.s
+src/video_frames.cpp.s:
+	$(MAKE) -f CMakeFiles/VF_ORB.dir/build.make CMakeFiles/VF_ORB.dir/src/video_frames.cpp.s
+.PHONY : src/video_frames.cpp.s
 
 # Help Target
 help:
@@ -158,10 +158,10 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... ORB_Feature"
-	@echo "... src/orb_feature.o"
-	@echo "... src/orb_feature.i"
-	@echo "... src/orb_feature.s"
+	@echo "... VF_ORB"
+	@echo "... src/video_frames.o"
+	@echo "... src/video_frames.i"
+	@echo "... src/video_frames.s"
 .PHONY : help
 
 

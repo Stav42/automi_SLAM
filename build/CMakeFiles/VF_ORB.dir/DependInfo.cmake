@@ -4,8 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/aditya/Desktop/Team_Humanoid/SLAM/automi_SLAM/src/orb_feature.cpp" "/home/aditya/Desktop/Team_Humanoid/SLAM/automi_SLAM/build/CMakeFiles/ORB_Feature.dir/src/orb_feature.cpp.o"
-  "/home/aditya/Desktop/Team_Humanoid/SLAM/automi_SLAM/src/video_frames.cpp" "/home/aditya/Desktop/Team_Humanoid/SLAM/automi_SLAM/build/CMakeFiles/ORB_Feature.dir/src/video_frames.cpp.o"
+  "/home/aditya/Desktop/Team_Humanoid/SLAM/automi_SLAM/src/video_frames.cpp" "/home/aditya/Desktop/Team_Humanoid/SLAM/automi_SLAM/build/CMakeFiles/VF_ORB.dir/src/video_frames.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

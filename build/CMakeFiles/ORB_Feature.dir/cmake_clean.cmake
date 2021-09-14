@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/ORB_Feature.dir/src/orb_feature.cpp.o"
+  "CMakeFiles/ORB_Feature.dir/src/video_frames.cpp.o"
   "ORB_Feature"
   "ORB_Feature.pdb"
 )

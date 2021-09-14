@@ -53,7 +53,7 @@ CMAKE_BINARY_DIR = /home/aditya/Desktop/Team_Humanoid/SLAM/automi_SLAM/build
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/ORB_Feature.dir/all
+all: CMakeFiles/VF_ORB.dir/all
 
 .PHONY : all
 
@@ -63,36 +63,36 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/ORB_Feature.dir/clean
+clean: CMakeFiles/VF_ORB.dir/clean
 
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/ORB_Feature.dir
+# Target rules for target CMakeFiles/VF_ORB.dir
 
 # All Build rule for target.
-CMakeFiles/ORB_Feature.dir/all:
-	$(MAKE) -f CMakeFiles/ORB_Feature.dir/build.make CMakeFiles/ORB_Feature.dir/depend
-	$(MAKE) -f CMakeFiles/ORB_Feature.dir/build.make CMakeFiles/ORB_Feature.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/aditya/Desktop/Team_Humanoid/SLAM/automi_SLAM/build/CMakeFiles --progress-num=1,2 "Built target ORB_Feature"
-.PHONY : CMakeFiles/ORB_Feature.dir/all
+CMakeFiles/VF_ORB.dir/all:
+	$(MAKE) -f CMakeFiles/VF_ORB.dir/build.make CMakeFiles/VF_ORB.dir/depend
+	$(MAKE) -f CMakeFiles/VF_ORB.dir/build.make CMakeFiles/VF_ORB.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/aditya/Desktop/Team_Humanoid/SLAM/automi_SLAM/build/CMakeFiles --progress-num=1,2 "Built target VF_ORB"
+.PHONY : CMakeFiles/VF_ORB.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/ORB_Feature.dir/rule: cmake_check_build_system
+CMakeFiles/VF_ORB.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/aditya/Desktop/Team_Humanoid/SLAM/automi_SLAM/build/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/ORB_Feature.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/VF_ORB.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/aditya/Desktop/Team_Humanoid/SLAM/automi_SLAM/build/CMakeFiles 0
-.PHONY : CMakeFiles/ORB_Feature.dir/rule
+.PHONY : CMakeFiles/VF_ORB.dir/rule
 
 # Convenience name for target.
-ORB_Feature: CMakeFiles/ORB_Feature.dir/rule
+VF_ORB: CMakeFiles/VF_ORB.dir/rule
 
-.PHONY : ORB_Feature
+.PHONY : VF_ORB
 
 # clean rule for target.
-CMakeFiles/ORB_Feature.dir/clean:
-	$(MAKE) -f CMakeFiles/ORB_Feature.dir/build.make CMakeFiles/ORB_Feature.dir/clean
-.PHONY : CMakeFiles/ORB_Feature.dir/clean
+CMakeFiles/VF_ORB.dir/clean:
+	$(MAKE) -f CMakeFiles/VF_ORB.dir/build.make CMakeFiles/VF_ORB.dir/clean
+.PHONY : CMakeFiles/VF_ORB.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.
