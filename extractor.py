@@ -1,5 +1,7 @@
 import cv2
 import numpy as np
+from skimage.measure import ransac
+from skimage.transform import FundamentalMatrixTransform
 
 
 class Extractor:
@@ -39,28 +41,31 @@ class Extractor:
         matches = None
         if self.last is not None:
             matches = self.bf.knnMatch(des, self.last['des'], k=2)
-            #print(matches)
-            #matches = sorted(matches, key = lambda x:x.distance)
-            #matches = zip([kps[m[0].queryIdx] for m in matches],[self.last['kps'][m[0].trainIdx] for m in matches])
-
-            
+                    
             for m, n in matches:
                 if m.distance<0.75*n.distance:
-                    ret.append(m)
-          #          print(m.queryIdx)
-                    #print(m.pt[0], n.pt[0])
-                    #print(m.queryIdx, m.trainIdx)
-                            
-            #    if m.distance<0.75*n.distance:
-            #        print(dir(matches))
+                    kp1 = kps[m.queryIdx].pt
+                    kp2 = self.last['kps'][m.trainIdx].pt
+                    ret.append((kp1, kp2))
+               
 
-            #   print(self.last)
-           
-            matches =  [kps[m.queryIdx] for m in ret], [self.last['kps'][m.trainIdx] for m in ret]
-            print(len(matches[0])) 
+        #    matches =  [kps[m.queryIdx] for m in ret], [self.last['kps'][m.trainIdx] for m in ret]
+        
+        #filter
+        if len(ret)>0:
+            ret = np.array(ret)
+            model, inliers = ransac((ret[:, 0], ret[:, 1]),
+                    FundamentalMatrixTransform,
+                    min_samples = 8,
+                    residual_threshold=1,
+                    max_trials=50)
+            
+            ret = ret[inliers]
+
+
         self.last = {'kps': kps, 'des': des}
         #return kps, des
-        return matches
+        return ret
 
     def extract_anms(self, img):
         kp = self.orb.detect(img)
