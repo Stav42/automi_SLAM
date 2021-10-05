@@ -10,20 +10,10 @@ class Extractor:
         self.orb = cv2.ORB_create()
         self.last = None
 
-        """
-        index_params = dict( algorithm = 6,
-                   table_number = 6, # 12
-                   key_size = 12,     # 20
-                   multi_probe_level = 2) #2
-
-        self.flann = cv2.FlannBasedMatcher(index_params, dict(checks=100))
-        """
-
         self.bf = cv2.BFMatcher(cv2.NORM_HAMMING)
 
 
     def extract_grid(self, img):
-        N = 20
         kp, des = self.orb.detectAndCompute(img,None)
         return kp
        
@@ -47,9 +37,6 @@ class Extractor:
                     kp1 = kps[m.queryIdx].pt
                     kp2 = self.last['kps'][m.trainIdx].pt
                     ret.append((kp1, kp2))
-               
-
-        #    matches =  [kps[m.queryIdx] for m in ret], [self.last['kps'][m.trainIdx] for m in ret]
         
         #filter
         if len(ret)>0:
@@ -64,7 +51,6 @@ class Extractor:
 
 
         self.last = {'kps': kps, 'des': des}
-        #return kps, des
         return ret
 
     def extract_anms(self, img):

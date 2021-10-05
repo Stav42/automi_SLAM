@@ -4,8 +4,6 @@ import numpy as np
 from ssc import ssc
 from extractor import Extractor
 
-
-
 A = Extractor()
 
 def process_frames(frame):
