@@ -8,13 +8,16 @@ class Extractor:
         self.orb = cv2.ORB_create()
         self.last = None
 
-
+        """
         index_params = dict( algorithm = 6,
                    table_number = 6, # 12
                    key_size = 12,     # 20
-                   multi_probe_level = 1) #2
+                   multi_probe_level = 2) #2
 
         self.flann = cv2.FlannBasedMatcher(index_params, dict(checks=100))
+        """
+
+        self.bf = cv2.BFMatcher(cv2.NORM_HAMMING)
 
 
     def extract_grid(self, img):
@@ -32,13 +35,32 @@ class Extractor:
         kps, des = self.orb.compute(img, kps)
 
         #matching
+        ret = []
         matches = None
         if self.last is not None:
-            matches = self.flann.knnMatch(des, self.last['des'], k=2)
+            matches = self.bf.knnMatch(des, self.last['des'], k=2)
+            #print(matches)
+            #matches = sorted(matches, key = lambda x:x.distance)
+            #matches = zip([kps[m[0].queryIdx] for m in matches],[self.last['kps'][m[0].trainIdx] for m in matches])
 
-        self.last = {'kps ': kps, 'des': des}
-        return kps, des, matches
+            
+            for m, n in matches:
+                if m.distance<0.75*n.distance:
+                    ret.append(m)
+          #          print(m.queryIdx)
+                    #print(m.pt[0], n.pt[0])
+                    #print(m.queryIdx, m.trainIdx)
+                            
+            #    if m.distance<0.75*n.distance:
+            #        print(dir(matches))
 
+            #   print(self.last)
+           
+            matches =  [kps[m.queryIdx] for m in ret], [self.last['kps'][m.trainIdx] for m in ret]
+            print(len(matches[0])) 
+        self.last = {'kps': kps, 'des': des}
+        #return kps, des
+        return matches
 
     def extract_anms(self, img):
         kp = self.orb.detect(img)
