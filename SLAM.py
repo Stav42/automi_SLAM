@@ -6,6 +6,7 @@ from extractor import Extractor
 
 A = Extractor()
 
+
 def process_frames(frame):
 
     matches = A.extract_spread(frame)
@@ -15,7 +16,10 @@ def process_frames(frame):
     for m in matches:
         u1, v1 = m[0]
         u2, v2 = m[1]
-    
+        
+        u1, v1 = A.denormalize(u1,v1, frame.shape)
+        u2, v2 = A.denormalize(u2, v2, frame.shape)
+
         cv2.circle(frame, (int(u1), int(v1)),  3, (0, 255, 0), -1)
         cv2.circle(frame, (int(u2), int(v2)),  3, (0, 255, 0), -1)
         cv2.line(frame, (int(u1), int(v1)), (int(u2), int(v2)), (0, 255, 0), thickness=3, lineType=8)
