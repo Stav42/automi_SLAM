@@ -3,7 +3,10 @@ import numpy as np
 from skimage.measure import ransac
 from skimage.transform import FundamentalMatrixTransform
 from skimage.transform import EssentialMatrixTransform
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8d7eab0c7ace9109a7bad7a980f2cbc45339e468
 
 H = 480
 W = 640
@@ -26,6 +29,10 @@ class Extractor:
     def normalize(self, x):
         return np.dot(self.Kinv, add_ones(x).T).T[:,0:2] 
 
+    def denormalize(self, x,y, shape):
+        x_denorm = int(round(x+shape[0]//2))
+        y_denorm = int(round(y+shape[1]//2))
+        return x_denorm, y_denorm
 
     def denormalize(self, x,y, shape):
         #get this cleared up a bit
@@ -73,6 +80,7 @@ class Extractor:
         #filter
         if len(ret)>0:
             #Normalize to centre
+<<<<<<< HEAD
             ret[:, 0, :] = self.normalize(ret[:,0,:])
             ret[:, 1, :] = self.normalize(ret[:,1,:])
            # ret[:, 0, :] = np.dot(self.Kinv, add_ones(ret[:,0, :]).T).T[:,0:2] 
@@ -81,6 +89,10 @@ class Extractor:
 
            # ret[:, :, 0] -= img.shape[0]//2
            # ret[:, :, 1] -= img.shape[1]//2
+=======
+            ret[:, :, 0] -= img.shape[0]//2
+            ret[:, :, 1] -= img.shape[1]//2
+>>>>>>> 8d7eab0c7ace9109a7bad7a980f2cbc45339e468
             
             model, inliers = ransac((ret[:, 0], ret[:, 1]),
                     FundamentalMatrixTransform,
