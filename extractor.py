@@ -2,16 +2,41 @@ import cv2
 import numpy as np
 from skimage.measure import ransac
 from skimage.transform import FundamentalMatrixTransform
+from skimage.transform import EssentialMatrixTransform
 
+
+H = 480
+W = 640
+
+
+def add_ones(x):
+    return np.concatenate([x, np.ones((x.shape[0], 1))], axis =1)
 
 class Extractor:
     
-    def __init__(self):
+    def __init__(self, K):
         self.orb = cv2.ORB_create()
         self.last = None
 
         self.bf = cv2.BFMatcher(cv2.NORM_HAMMING)
+        self.K  = K
+        self.Kinv = np.linalg.inv(self.K)
 
+
+    def normalize(self, x):
+        return np.dot(self.Kinv, add_ones(x).T).T[:,0:2] 
+
+
+    def denormalize(self, x,y, shape):
+        #get this cleared up a bit
+        ret = np.dot(self.K, np.array([x,y,1.0]))
+        ret /= ret[2]
+
+        return int(round(ret[0])), int(round(ret[1]))
+
+#        x_denorm = int(round(x+shape[0]//2))
+#        y_denorm = int(round(y+shape[1]//2))
+#        return x_denorm, y_denorm
 
     def extract_grid(self, img):
         kp, des = self.orb.detectAndCompute(img,None)
@@ -38,9 +63,25 @@ class Extractor:
                     kp2 = self.last['kps'][m.trainIdx].pt
                     ret.append((kp1, kp2))
         
+        ret = np.array(ret)
+    
+        model = None
+        #Normalize to centre
+        #ret[:, :, 0] -= img.shape[0]//2
+        #ret[:, :, 1] -= img.shape[1]//2
+    
         #filter
         if len(ret)>0:
-            ret = np.array(ret)
+            #Normalize to centre
+            ret[:, 0, :] = self.normalize(ret[:,0,:])
+            ret[:, 1, :] = self.normalize(ret[:,1,:])
+           # ret[:, 0, :] = np.dot(self.Kinv, add_ones(ret[:,0, :]).T).T[:,0:2] 
+           # ret[:, 1, :] = np.dot(self.Kinv, add_ones(ret[:,1, :]).T).T[:,0:2] 
+
+
+           # ret[:, :, 0] -= img.shape[0]//2
+           # ret[:, :, 1] -= img.shape[1]//2
+            
             model, inliers = ransac((ret[:, 0], ret[:, 1]),
                     FundamentalMatrixTransform,
                     min_samples = 8,
@@ -48,11 +89,16 @@ class Extractor:
                     max_trials=50)
             
             ret = ret[inliers]
-
+        
+        #Printing the Fundamental Matrix Obtained
+        #Single Value Decomposition of the FM
+            s,v,d = np.linalg.svd(model.params)
+            print(v)
+        
 
         self.last = {'kps': kps, 'des': des}
         return ret
-
+    """
     def extract_anms(self, img):
         kp = self.orb.detect(img)
         kp = sorted(kp, key=lambda x: x.response, reverse=True)
@@ -62,4 +108,4 @@ class Extractor:
          )
  
         return selected_keypoints
- 
+    """
