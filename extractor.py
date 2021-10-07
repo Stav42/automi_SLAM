@@ -3,10 +3,6 @@ import numpy as np
 from skimage.measure import ransac
 from skimage.transform import FundamentalMatrixTransform
 from skimage.transform import EssentialMatrixTransform
-<<<<<<< HEAD
-
-=======
->>>>>>> 8d7eab0c7ace9109a7bad7a980f2cbc45339e468
 
 H = 480
 W = 640
@@ -30,25 +26,12 @@ class Extractor:
         return np.dot(self.Kinv, add_ones(x).T).T[:,0:2] 
 
     def denormalize(self, x,y, shape):
-        x_denorm = int(round(x+shape[0]//2))
-        y_denorm = int(round(y+shape[1]//2))
-        return x_denorm, y_denorm
-
-    def denormalize(self, x,y, shape):
         #get this cleared up a bit
         ret = np.dot(self.K, np.array([x,y,1.0]))
-        ret /= ret[2]
+     #   ret /= ret[2]
 
         return int(round(ret[0])), int(round(ret[1]))
-
-#        x_denorm = int(round(x+shape[0]//2))
-#        y_denorm = int(round(y+shape[1]//2))
-#        return x_denorm, y_denorm
-
-    def extract_grid(self, img):
-        kp, des = self.orb.detectAndCompute(img,None)
-        return kp
-       
+      
     def extract_spread(self, img):
         
         #detecting
@@ -73,27 +56,14 @@ class Extractor:
         ret = np.array(ret)
     
         model = None
-        #Normalize to centre
-        #ret[:, :, 0] -= img.shape[0]//2
-        #ret[:, :, 1] -= img.shape[1]//2
-    
+   
         #filter
         if len(ret)>0:
+
             #Normalize to centre
-<<<<<<< HEAD
             ret[:, 0, :] = self.normalize(ret[:,0,:])
             ret[:, 1, :] = self.normalize(ret[:,1,:])
-           # ret[:, 0, :] = np.dot(self.Kinv, add_ones(ret[:,0, :]).T).T[:,0:2] 
-           # ret[:, 1, :] = np.dot(self.Kinv, add_ones(ret[:,1, :]).T).T[:,0:2] 
 
-
-           # ret[:, :, 0] -= img.shape[0]//2
-           # ret[:, :, 1] -= img.shape[1]//2
-=======
-            ret[:, :, 0] -= img.shape[0]//2
-            ret[:, :, 1] -= img.shape[1]//2
->>>>>>> 8d7eab0c7ace9109a7bad7a980f2cbc45339e468
-            
             model, inliers = ransac((ret[:, 0], ret[:, 1]),
                     FundamentalMatrixTransform,
                     min_samples = 8,
@@ -110,14 +80,3 @@ class Extractor:
 
         self.last = {'kps': kps, 'des': des}
         return ret
-    """
-    def extract_anms(self, img):
-        kp = self.orb.detect(img)
-        kp = sorted(kp, key=lambda x: x.response, reverse=True)
-         
-        selected_keypoints = ssc(
-        kp, 750, 0.1, img.shape[1], img.shape[0]
-         )
- 
-        return selected_keypoints
-    """
