@@ -1,3 +1,0 @@
-/home/aditya/Desktop/Team_Humanoid/SLAM/automi_SLAM/build/CMakeFiles/rebuild_cache.dir
-/home/aditya/Desktop/Team_Humanoid/SLAM/automi_SLAM/build/CMakeFiles/edit_cache.dir
-/home/aditya/Desktop/Team_Humanoid/SLAM/automi_SLAM/build/CMakeFiles/VF_ORB.dir
