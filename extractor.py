@@ -7,6 +7,8 @@ from skimage.transform import EssentialMatrixTransform
 H = 480
 W = 640
 
+v_avg_est = []
+
 
 def add_ones(x):
     return np.concatenate([x, np.ones((x.shape[0], 1))], axis =1)
@@ -65,7 +67,7 @@ class Extractor:
             ret[:, 1, :] = self.normalize(ret[:,1,:])
 
             model, inliers = ransac((ret[:, 0], ret[:, 1]),
-                    FundamentalMatrixTransform,
+                    EssentialMatrixTransform,
                     min_samples = 8,
                     residual_threshold=1,
                     max_trials=50)
@@ -75,7 +77,10 @@ class Extractor:
         #Printing the Fundamental Matrix Obtained
         #Single Value Decomposition of the FM
             s,v,d = np.linalg.svd(model.params)
-            print(v)
+            v_est = np.sqrt(2)/((v[0]+v[1])/2)
+            v_avg_est.append(v_est)
+
+            print(v, np.median(v_avg_est))
         
 
         self.last = {'kps': kps, 'des': des}

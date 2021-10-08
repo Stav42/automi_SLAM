@@ -1,11 +1,10 @@
 import cv2
 import time
 import numpy as np
-from ssc import ssc
 from extractor import Extractor
 
 
-F = 400
+F = 212
 H = 480
 W = 640
 

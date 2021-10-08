@@ -1,2 +1,6 @@
 This is python prototype of SLAM
 
+
+Issues:
+
+1. Wrong calibration with respect to the focus. The median based approach, not working. Understand mathematics and refine the calculations
