@@ -69,11 +69,13 @@ class Extractor:
             model, inliers = ransac((ret[:, 0], ret[:, 1]),
                     EssentialMatrixTransform,
                     min_samples = 8,
-                    residual_threshold=1,
+                    residual_threshold=0.05,
                     max_trials=50)
             
             ret = ret[inliers]
-        
+            
+
+            print("number of matches: ", len(ret))
         #Printing the Fundamental Matrix Obtained
         #Single Value Decomposition of the FM
             s,v,d = np.linalg.svd(model.params)

@@ -4,7 +4,7 @@ import numpy as np
 from extractor import Extractor
 
 
-F = 212
+F = 210
 H = 480
 W = 640
 
